@@ -5,24 +5,18 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { 
   Container, Typography, Box, Card, CardContent, Button, AppBar, Toolbar, IconButton,
   TextField, MenuItem, Select, FormControl, InputLabel, Grid, Paper, LinearProgress,
-  Alert, AlertTitle, Chip, Dialog, DialogTitle, DialogContent, DialogActions,
-  List, ListItem, ListItemText, ListItemIcon, Divider, Table, TableBody, TableCell,
-  TableContainer, TableHead, TableRow, Avatar, Badge, CircularProgress
+  Alert, AlertTitle, Chip, List, ListItem, ListItemText, ListItemIcon, Divider, 
+  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, CircularProgress
 } from '@mui/material';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import CloudIcon from '@mui/icons-material/Cloud';
 import BugReportIcon from '@mui/icons-material/BugReport';
 import NatureIcon from '@mui/icons-material/Nature';
 import WaterDropIcon from '@mui/icons-material/WaterDrop';
-import DeviceThermostatIcon from '@mui/icons-material/DeviceThermostat';
-import UploadFileIcon from '@mui/icons-material/UploadFile';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import WarningIcon from '@mui/icons-material/Warning';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import BarChartIcon from '@mui/icons-material/BarChart';
-import AgricultureIcon from '@mui/icons-material/Agriculture';
 
 // Create Material-UI theme
 const theme = createTheme({
@@ -732,8 +726,7 @@ const PestDetection = () => {
 const WeatherAlerts = () => {
   const navigate = useNavigate();
   const [weatherData, setWeatherData] = useState(null);
-  const [location, setLocation] = useState('Punjab, India');
-  const [alerts, setAlerts] = useState([
+  const [alerts] = useState([
     { id: 1, type: 'warning', title: 'Heavy Rainfall Alert', message: 'Expected 50-75mm rainfall in next 48 hours. Avoid field operations.', time: '2 hours ago' },
     { id: 2, type: 'info', title: 'Optimal Spraying Weather', message: 'Low wind speed and humidity ideal for pesticide application.', time: '6 hours ago' },
     { id: 3, type: 'success', title: 'Good Harvesting Weather', message: 'Clear skies expected for next 5 days. Good for harvesting operations.', time: '1 day ago' }
@@ -1405,50 +1398,6 @@ const Dashboard = () => {
   );
 };
 
-// Feature pages
-const FeaturePage = ({ title, icon, description, comingSoon = false }) => {
-  const navigate = useNavigate();
-  
-  return (
-    <Box>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" color="inherit" onClick={() => navigate('/dashboard')}>
-            <ArrowBackIcon />
-          </IconButton>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            {icon} {title}
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      
-      <Container maxWidth="md" sx={{ py: 6, textAlign: 'center' }}>
-        <Typography variant="h2" sx={{ fontSize: '4rem', mb: 2 }}>{icon}</Typography>
-        <Typography variant="h3" gutterBottom>{title}</Typography>
-        <Typography variant="body1" color="text.secondary" paragraph sx={{ fontSize: '1.2rem' }}>
-          {description}
-        </Typography>
-        
-        {comingSoon ? (
-          <Box sx={{ mt: 4, p: 3, backgroundColor: '#fff3cd', borderRadius: 2 }}>
-            <Typography variant="h6" gutterBottom>🚧 Coming Soon</Typography>
-            <Typography variant="body1" color="text.secondary">
-              This feature is currently under development and will be available soon.
-              Our team is working hard to bring you the best agricultural advisory experience.
-            </Typography>
-            <Button variant="outlined" sx={{ mt: 2 }} onClick={() => navigate('/dashboard')}>
-              Back to Dashboard
-            </Button>
-          </Box>
-        ) : (
-          <Button variant="contained" size="large" sx={{ mt: 3 }} onClick={() => navigate('/dashboard')}>
-            Back to Dashboard
-          </Button>
-        )}
-      </Container>
-    </Box>
-  );
-};
 
 // About/Learn More page
 const AboutPage = () => {
