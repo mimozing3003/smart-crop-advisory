@@ -1,21 +1,13 @@
 {
-  "name": "smart-crop-advisory",
   "version": 2,
-  "public": false,
-  "github": {
-    "silent": true
-  },
   "buildCommand": "cd frontend && npm run build",
   "outputDirectory": "frontend/build",
   "installCommand": "cd frontend && npm install",
   "devCommand": "cd frontend && npm start",
-  "routes": [
+  "rewrites": [
     {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/((?!static/.*).*)",
+      "destination": "/index.html"
     }
   ],
   "headers": [

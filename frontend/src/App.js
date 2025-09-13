@@ -1,26 +1,9 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { Container, Typography, Box, Card, CardContent, Button } from '@mui/material';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import './i18n/i18n';
-
-// Components
-import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer';
-import LoadingSpinner from './components/common/LoadingSpinner';
-
-// Lazy-loaded pages
-const Home = React.lazy(() => import('./pages/Home'));
-const Dashboard = React.lazy(() => import('./pages/Dashboard'));
-const CropAdvisory = React.lazy(() => import('./pages/CropAdvisory'));
-const WeatherAlerts = React.lazy(() => import('./pages/WeatherAlerts'));
-const PestDetection = React.lazy(() => import('./pages/PestDetection'));
-const MarketPrices = React.lazy(() => import('./pages/MarketPrices'));
-const SoilHealth = React.lazy(() => import('./pages/SoilHealth'));
-const Profile = React.lazy(() => import('./pages/Profile'));
-const Login = React.lazy(() => import('./pages/auth/Login'));
-const Register = React.lazy(() => import('./pages/auth/Register'));
 
 // Create Material-UI theme
 const theme = createTheme({
@@ -103,6 +86,86 @@ const queryClient = new QueryClient({
   },
 });
 
+// Simple Home component for initial deployment
+const Home = () => (
+  <Container maxWidth="lg" sx={{ py: 4 }}>
+    <Box textAlign="center" mb={4}>
+      <Typography variant="h1" component="h1" gutterBottom>
+        🌾 Smart Crop Advisory System
+      </Typography>
+      <Typography variant="h5" color="text.secondary" paragraph>
+        AI-powered agricultural guidance for small and marginal farmers
+      </Typography>
+      <Typography variant="body1" color="text.secondary" paragraph>
+        SIH 2025 - Problem Statement ID: 25010
+      </Typography>
+    </Box>
+    
+    <Box display="grid" gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))" gap={3} mb={4}>
+      <Card>
+        <CardContent>
+          <Typography variant="h6" gutterBottom>🌱 Crop Advisory</Typography>
+          <Typography variant="body2">Get real-time, personalized crop recommendations based on soil type, weather, and crop history.</Typography>
+        </CardContent>
+      </Card>
+      
+      <Card>
+        <CardContent>
+          <Typography variant="h6" gutterBottom>🦠 Pest Detection</Typography>
+          <Typography variant="body2">AI-powered image recognition for crop disease diagnosis and treatment recommendations.</Typography>
+        </CardContent>
+      </Card>
+      
+      <Card>
+        <CardContent>
+          <Typography variant="h6" gutterBottom>🌤️ Weather Alerts</Typography>
+          <Typography variant="body2">Predictive weather insights and timely alerts for better farming decisions.</Typography>
+        </CardContent>
+      </Card>
+      
+      <Card>
+        <CardContent>
+          <Typography variant="h6" gutterBottom>📈 Market Prices</Typography>
+          <Typography variant="body2">Real-time commodity prices and market trends for informed selling decisions.</Typography>
+        </CardContent>
+      </Card>
+      
+      <Card>
+        <CardContent>
+          <Typography variant="h6" gutterBottom>🌍 Soil Health</Typography>
+          <Typography variant="body2">Comprehensive soil analysis and fertilizer guidance for sustainable farming.</Typography>
+        </CardContent>
+      </Card>
+      
+      <Card>
+        <CardContent>
+          <Typography variant="h6" gutterBottom>🗣️ Multilingual</Typography>
+          <Typography variant="body2">Available in Hindi, Punjabi, and English with voice support for low-literate users.</Typography>
+        </CardContent>
+      </Card>
+    </Box>
+    
+    <Box textAlign="center">
+      <Typography variant="h6" gutterBottom>
+        Empowering 146+ Million Farmers Across India
+      </Typography>
+      <Button variant="contained" size="large" sx={{ mt: 2, mr: 2 }}>
+        Get Started
+      </Button>
+      <Button variant="outlined" size="large" sx={{ mt: 2 }}>
+        Learn More
+      </Button>
+    </Box>
+    
+    <Box mt={6} textAlign="center">
+      <Typography variant="body2" color="text.secondary">
+        Government of Punjab | Department of Higher Education<br/>
+        Category: Software | Theme: Agriculture, FoodTech & Rural Development
+      </Typography>
+    </Box>
+  </Container>
+);
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -110,39 +173,22 @@ function App() {
         <CssBaseline />
         <Router>
           <div className="App">
-            <Navbar />
-            <main style={{ minHeight: 'calc(100vh - 140px)', paddingTop: '20px' }}>
-              <Suspense fallback={<LoadingSpinner />}>
-                <Routes>
-                  {/* Public Routes */}
-                  <Route path="/" element={<Home />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-                  
-                  {/* Protected Routes */}
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/crop-advisory" element={<CropAdvisory />} />
-                  <Route path="/weather-alerts" element={<WeatherAlerts />} />
-                  <Route path="/pest-detection" element={<PestDetection />} />
-                  <Route path="/market-prices" element={<MarketPrices />} />
-                  <Route path="/soil-health" element={<SoilHealth />} />
-                  <Route path="/profile" element={<Profile />} />
-                  
-                  {/* 404 Route */}
-                  <Route path="*" element={
-                    <div style={{ 
-                      textAlign: 'center', 
-                      padding: '100px 20px',
-                      color: '#666'
-                    }}>
-                      <h2>404 - Page Not Found</h2>
-                      <p>The page you're looking for doesn't exist.</p>
-                    </div>
-                  } />
-                </Routes>
-              </Suspense>
+            <main>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="*" element={
+                  <Container maxWidth="sm" sx={{ textAlign: 'center', py: 8 }}>
+                    <Typography variant="h4" gutterBottom>404 - Page Not Found</Typography>
+                    <Typography variant="body1" color="text.secondary">
+                      The page you're looking for doesn't exist.
+                    </Typography>
+                    <Button variant="contained" sx={{ mt: 2 }} href="/">
+                      Go Home
+                    </Button>
+                  </Container>
+                } />
+              </Routes>
             </main>
-            <Footer />
           </div>
         </Router>
       </ThemeProvider>

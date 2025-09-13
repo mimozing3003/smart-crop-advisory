@@ -154,3 +154,4 @@ trained_models/
 # Image processing temp files
 temp_images/
 processed_images/
+.vercel
